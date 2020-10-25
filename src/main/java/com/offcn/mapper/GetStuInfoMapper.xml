@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.offcn.mapper.IGetStuInfoMapper">
+
+    <select id="getAllStu" resultType="com.offcn.bean.Student">
+        select * from stubaseinfo
+    </select>
+
+    <select id="getOne" resultType="com.offcn.bean.Student">
+        select * from stubaseinfo where Stu_id = #{Stu_id}
+    </select>
+
+    <select id="getValidCount" resultType="Integer">
+        select count(*) from stubaseinfo where Stu_remark != "休学"
+    </select>
+
+    <update id="updateStuInfo">
+        update stubaseinfo set
+         Stu_totalScore = #{Stu_totalScore} ,
+         Stu_remark = #{Stu_remark} ,
+         Stu_phone = #{Stu_phone} ,
+         Stu_graduate_school = #{Stu_graduate_school} ,
+         Stu_major = #{Stu_major} ,
+         Stu_qualifications = #{Stu_qualifications},
+         Stu_reward = #{Stu_reward}
+         where
+         Stu_id = #{Stu_id}
+    </update>
+
+    <update id="updateAttendence_and_Score">
+        update stubaseinfo set
+        Stu_totalScore = #{Stu_totalScore} ,
+        Stu_attendance = #{Stu_attendance}
+        where
+        Stu_id = #{Stu_id}
+    </update>
+
+    <update id="updateDispline_and_Score">
+        update stubaseinfo set
+        Stu_totalScore = #{Stu_totalScore} ,
+        Stu_discipline = #{Stu_discipline}
+        where
+        Stu_id = #{Stu_id}
+    </update>
+
+    <select id="getOneByName" resultType="com.offcn.bean.Student">
+        select * from stubaseinfo where Stu_name = #{Stu_name}
+    </select>
+
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+
+    <!--属性配置
+        resource:从classes文件夹开始寻找文件
+    -->
+    <properties resource="db.properties"/>
+
+    <!--配置延迟加载-->
+    <settings>
+        <!--打开延迟加载的全局开关-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--不要积极的去查询关联的对象-->
+        <setting name="aggressiveLazyLoading" value="true"/>
+        <!--覆盖延迟加载的触发方法-->
+        <!--<setting name="lazyLoadTriggerMethods" value=""/>
+-->
+    </settings>
+    
+    
+    <!--配置别名-->
+    <typeAliases>
+        <!--
+            为单个类配置别名
+        -->
+        <!--<typeAlias type="com.ujiuye.mybatis.bean.User" alias="User"/>-->
+        <!--
+            给配置的包下的所有的java类都创建别名
+            默认情况下,别名为简单类名,大小写不敏感
+        -->
+        <package name="com.ujiuye.mybatis.bean"/>
+
+    </typeAliases>
+
+
+
+    <!--配置环境
+        default:mybatis启动时使用哪个环境
+    -->
+    <environments default="development">
+        <environment id="development">
+            <!--事务管理器
+                使用mysql的事务管理器来管理事务
+            -->
+            <transactionManager type="JDBC"/>
+            <!--数据源-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--关联mapper映射文件-->
+    <mappers>
+        <!--resource从classes文件夹中寻找文件-->
+        <mapper resource="com/offcn/mapper/GetStuInfoMapper.xml"></mapper>
+    </mappers>
+</configuration>
